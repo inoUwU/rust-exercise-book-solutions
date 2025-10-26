@@ -10,6 +10,9 @@ use assert_cmd::Command;
 //
 
 // memo
+// #[test]を指定するとCargo testで実行される
+// Rustでは標準ライブラリとして外部コマンドを std::process::Command で実行可能
+// assert系も標準である。https://doc.rust-jp.rs/book-ja/ch11-01-writing-tests.html
 
 #[test]
 fn runs() {
