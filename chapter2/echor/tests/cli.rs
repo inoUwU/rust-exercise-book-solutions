@@ -1,5 +1,8 @@
 use assert_cmd::Command;
+use predicates::prelude::*;
 use std::fs;
+
+// TODO: テストが上手く動作しないので後で調べる。
 
 type TestResult = Result<(), Box<dyn std::error::Error>>;
 
@@ -22,23 +25,26 @@ fn run(args: &[&str], expected_file: &str) -> TestResult {
     Ok(())
 }
 
-// 出力する値と指定したファイルの内容が同一であかことを確認するテスト
+// --------------------------------------------------
 #[test]
 fn hello1() -> TestResult {
     run(&["Hello there"], "tests/expected/hello1.txt")
 }
 
+// --------------------------------------------------
 #[test]
 fn hello2() -> TestResult {
     run(&["Hello", "there"], "tests/expected/hello2.txt")
 }
 
+// --------------------------------------------------
 #[test]
 fn hello1_no_newline() -> TestResult {
-    run(&["Hello there", "-n"], "tests/expected/hello1.n.txt")
+    run(&["Hello  there", "-n"], "tests/expected/hello1.n.txt")
 }
 
+// --------------------------------------------------
 #[test]
 fn hello2_no_newline() -> TestResult {
-    run(&["Hello", "there", "-n"], "tests/expected/hello2.n.txt")
+    run(&["-n", "Hello", "there"], "tests/expected/hello2.n.txt")
 }
